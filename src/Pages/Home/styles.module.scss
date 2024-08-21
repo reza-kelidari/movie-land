@@ -1,0 +1,30 @@
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 8rem 2rem 2rem;
+
+  .section,
+  .aside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    flex: 3;
+    height: calc(100vh - 10rem);
+    border-radius: 2rem;
+    overflow-y: scroll;
+    scrollbar-width: none;
+  }
+
+  .aside {
+    flex: 1;
+  }
+}

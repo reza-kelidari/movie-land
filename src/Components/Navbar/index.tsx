@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Styles from "./styles.module.scss";
 import GlobalStyles from "../../global.module.scss";
 
@@ -7,10 +7,19 @@ export default function Navbar() {
     search: boolean;
     close: boolean;
   }
+
   const [active, setActive] = useState<NavbarStatus>({
     search: true,
     close: false,
   });
+
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 640) {
+        setActive({ search: true, close: false });
+      }
+    });
+  }, []);
 
   const changeActive: () => void = () =>
     setActive((prevState) => ({

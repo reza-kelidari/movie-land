@@ -1,8 +1,13 @@
-const apiKey: string = "Bearer 205942f6e3a6272624f6d1f457d595dc";
+const apiKey: string =
+  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyMDU5NDJmNmUzYTYyNzI2MjRmNmQxZjQ1N2Q1OTVkYyIsIm5iZiI6MTcyNDE1NzI4NC4zMzkyNywic3ViIjoiNjZjMjAyMjQwYzg3ZDE2NTZmMWE4YjMxIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.4HNFx2j2UFL9Pf-XCep6wBglTE4ESN58Qt1Jhi0oyME";
+const url: string = "https://api.themoviedb.org/3/";
+const query: string = "?language=fa-IR";
 
 export enum Type {
-  Upcoming = "upcoming",
-  Popular = "popular",
+  Upcoming = "movie/upcoming",
+  Popular = "movie/popular",
+  TopRated = "tv/top_rated",
+  Trending = "trending/movie/week",
 }
 
 export interface Movie {
@@ -29,8 +34,11 @@ interface Response {
   total_results: number;
 }
 
-export default async function getContent(content: Type): Promise<Response> {
-  return await fetch("https://api.themoviedb.org/3/movie/" + content, {
+export default async function getContent(
+  content: Type,
+  noQuery: boolean = false
+): Promise<Response> {
+  return await fetch(url + content + (!noQuery && query), {
     method: "GET",
     headers: {
       accept: "application/json",
@@ -38,7 +46,7 @@ export default async function getContent(content: Type): Promise<Response> {
     },
   })
     .then((response) => response.json())
-    .then((response) => {
+    .then((response: Response) => {
       return response;
     })
     .catch((err) => {
