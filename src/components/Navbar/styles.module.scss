@@ -1,0 +1,58 @@
+.navBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  margin: 2rem;
+  width: calc(100% - 4rem);
+  background: #ffffff22;
+  border-radius: 2rem;
+  padding: 0.5rem 2rem;
+  height: 4rem;
+
+  .title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .searchBar {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  .activeSearch,
+  .closeSearch {
+    display: none;
+
+    &.hide {
+      display: none !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .navBar {
+    padding: 0.5rem 1rem;
+    margin: 1rem;
+    width: calc(100% - 2rem);
+
+    .searchBar {
+      width: 70%;
+
+      &.hide {
+        display: none;
+      }
+    }
+
+    .activeSearch,
+    .closeSearch {
+      display: unset;
+    }
+
+    .activeSearch.hide ~ .title {
+      display: none !important;
+    }
+  }
+}
