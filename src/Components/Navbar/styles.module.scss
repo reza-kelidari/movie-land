@@ -11,6 +11,7 @@
   height: 4rem;
   top: 0;
   backdrop-filter: blur(5px);
+  z-index: 99;
 
   .title {
     display: flex;
