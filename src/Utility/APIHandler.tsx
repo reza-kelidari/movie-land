@@ -15,9 +15,10 @@ export enum Type {
   Popular = "movie/popular",
   TopRated = "tv/top_rated",
   Trending = "trending/movie/week",
+  Genre = "genre/movie/list",
 }
 
-export interface Movie {
+export interface MovieType {
   adult: boolean;
   backdrop_path: string;
   genre_ids: Array<number>;
@@ -29,14 +30,32 @@ export interface Movie {
   poster_path: string;
   release_date: string;
   title: string;
-  video: false;
+  video: boolean;
   vote_average: number;
   vote_count: number;
 }
 
-interface Response {
+export interface TVType {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: Array<number>;
+  id: number;
+  origin_country: Array<string>;
+  original_language: string;
+  original_name: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  first_air_date: string;
+  name: string;
+  vote_average: number;
+  vote_count: number;
+}
+
+interface Response<Type> {
+  genres: Array<Genre>;
   page: number;
-  results: Array<Movie>;
+  results: Array<Type>;
   total_pages: number;
   total_results: number;
 }
@@ -46,25 +65,22 @@ export interface Genre {
   name: string;
 }
 
-interface Genres {
-  genres: Array<Genre>;
-}
+export default async function getContent<T extends Type>(
+  content: T
+): Promise<
+  Response<
+    T extends Type.TopRated ? TVType : T extends Type.Genre ? Genre : MovieType
+  >
+> {
+  console.log(url);
+  console.log(url);
 
-export default async function getContent(content: Type): Promise<Response> {
-  return await fetch(url + content + query, options)
+  return await fetch(
+    url + content + (content !== Type.Genre ? query : ""),
+    options
+  )
     .then((response) => response.json())
-    .then((response: Response) => {
-      return response;
-    })
-    .catch((err) => {
-      return err;
-    });
-}
-
-export function getGenres() {
-  return fetch(url + "genre/movie/list", options)
-    .then((response) => response.json())
-    .then((response: Genres) => {
+    .then((response) => {
       return response;
     })
     .catch((err) => {

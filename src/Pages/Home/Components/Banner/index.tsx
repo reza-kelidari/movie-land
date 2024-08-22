@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { Movie } from "../../../../Utility/APIHandler";
+import { MovieType } from "../../../../Utility/APIHandler";
 import Styles from "./styles.module.scss";
 import Logo from "../../../../assets/Banner_Loading.svg";
-import Next from "../../../../assets/Next.tsx";
-import Previus from "../../../../assets/Previus.tsx";
+import Next from "../../../../Assets/Next.tsx";
+import Previus from "../../../../Assets/Previus.tsx";
 
 interface Props {
-  content: Array<Movie>;
+  content: Array<MovieType>;
 }
 
 export default function Banner({ content }: Props) {

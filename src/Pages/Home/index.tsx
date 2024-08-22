@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import Styles from "./styles.module.scss";
-import getContent, { Movie, Type } from "../../Utility/APIHandler";
+import getContent, { MovieType, Type } from "../../Utility/APIHandler";
 import Banner from "./Components/Banner";
 import Populars from "./Components/SideBar/Popular";
 import Genres from "./Components/SideBar/Genres";
+import TopRated from "./Components/TopRated";
 
 export default function Home() {
-  const [content, setContent] = useState<Array<Movie>>([]);
+  const [content, setContent] = useState<Array<MovieType>>([]);
 
   useEffect(() => {
     getContent(Type.Trending).then((response) =>
@@ -33,11 +34,7 @@ export default function Home() {
           </div>
         </aside>
 
-        <section className={Styles.topRated}>
-          <h1 className={Styles.title}>
-            برترین ها 👑 <span className={Styles.small}>در تلوزیون ها</span>
-          </h1>
-        </section>
+        <TopRated />
       </main>
     </>
   );

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import Styles from "./styles.module.scss";
-import { Genre, getGenres } from "../../../../Utility/APIHandler";
+import getContent, { Genre, Type } from "../../../../Utility/APIHandler";
 
 export default function Genres() {
   const [genres, setGenres] = useState<Array<Genre>>([]);
 
   useEffect(() => {
-    getGenres().then((response) => setGenres(response.genres));
+    getContent(Type.Genre).then((response) => setGenres(response.genres));
   }, []);
 
   return (
