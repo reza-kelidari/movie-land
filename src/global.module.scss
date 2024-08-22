@@ -6,12 +6,18 @@
   box-sizing: border-box;
   font-family: "IBM Plex Sans Arabic";
   color: #fff;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 body {
   font: 20px "IBM Plex Sans Arabic";
   direction: rtl;
   background: #121212;
+
+  a {
+    text-decoration: none;
+  }
 
   input {
     background: transparent;

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { MovieType } from "../../Utility/APIHandler";
 import Styles from "./styles.module.scss";
 import Logo from "../../assets/Logo.svg";
+import { Link } from "react-router-dom";
 
 export default function Movie({ info }: { info: MovieType }) {
   const [image, setImage] = useState(Logo);
@@ -14,7 +15,7 @@ export default function Movie({ info }: { info: MovieType }) {
   }, []);
 
   return (
-    <div className={Styles.movie}>
+    <Link to={`/detail?type=movie&id=${info.id}`} className={Styles.movie}>
       <img src={image} alt="Cover" className={Styles.cover} />
 
       <div className={Styles.details}>
@@ -22,6 +23,6 @@ export default function Movie({ info }: { info: MovieType }) {
         <span className={Styles.year}>سال {info.release_date.slice(0, 4)}</span>
         <span className={Styles.rate}>{info.vote_average.toFixed(1)} ⭐</span>
       </div>
-    </div>
+    </Link>
   );
 }

@@ -5,7 +5,7 @@
   align-content: center;
   width: 10rem;
   height: 15rem;
-  user-select: none;
+  
   overflow: hidden;
   border-radius: 1rem;
   box-shadow: 0 0 0.75rem #00000022;
@@ -26,7 +26,7 @@
     width: 100%;
     object-fit: cover;
 
-    user-select: none;
+    
     transition: 0.3s ease-in-out all;
     overflow: hidden;
   }

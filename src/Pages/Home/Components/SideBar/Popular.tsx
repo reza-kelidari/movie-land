@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Styles from "./styles.module.scss";
 import getContent, { TVType, Type } from "../../../../Utility/APIHandler";
 import Logo from "../../../../Assets/Logo.svg";
+import { Link } from "react-router-dom";
 
 export default function Popular() {
   const [populars, setPopulars] = useState<Array<TVType>>([]);
@@ -35,7 +36,7 @@ function Item({ movie }: { movie: TVType }) {
   }, []);
 
   return (
-    <div className={Styles.movie}>
+    <Link to={`/detail?type=tv&id=${movie.id}`} className={Styles.movie}>
       <img src={image} alt="Cover" className={Styles.cover} />
       <div className={Styles.details}>
         <h3 className={Styles.title}>{movie.name}</h3>
@@ -44,6 +45,6 @@ function Item({ movie }: { movie: TVType }) {
         </span>
         <span className={Styles.point}>{movie.vote_average.toFixed(1)} ⭐</span>
       </div>
-    </div>
+    </Link>
   );
 }

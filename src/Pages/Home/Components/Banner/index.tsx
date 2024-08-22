@@ -4,12 +4,9 @@ import Styles from "./styles.module.scss";
 import Logo from "../../../../assets/Banner_Loading.svg";
 import Next from "../../../../Assets/Next.tsx";
 import Previus from "../../../../Assets/Previus.tsx";
+import { Link } from "react-router-dom";
 
-interface Props {
-  content: Array<MovieType>;
-}
-
-export default function Banner({ content }: Props) {
+export default function Banner({ content }: { content: Array<MovieType> }) {
   const [page, setPage] = useState<number>(0);
   const [image, setImage] = useState<string>(Logo);
 
@@ -39,7 +36,10 @@ export default function Banner({ content }: Props) {
   }, [page]);
 
   return (
-    <div className={Styles.banner}>
+    <Link
+      to={`/detail?type=movie&id=${content[page].id}`}
+      className={Styles.banner}
+    >
       <img src={image} alt="Backdrop" className={Styles.backdrop} />
       <div className={Styles.details}>
         <h1 className={Styles.title}>{content[page].title}</h1>
@@ -47,22 +47,24 @@ export default function Banner({ content }: Props) {
       </div>
       <div className={Styles.navigation}>
         <button
-          onClick={() =>
-            setPage((prevState) => (prevState > 0 ? prevState - 1 : 4))
-          }
+          onClick={(event) => {
+            event.preventDefault();
+            setPage((prevState) => (prevState > 0 ? prevState - 1 : 4));
+          }}
         >
           {<Previus />}
         </button>
         <button
-          onClick={() =>
+          onClick={(event) => {
+            event.preventDefault();
             setPage((prevState) =>
               prevState < content.length - 1 ? prevState + 1 : 0
-            )
-          }
+            );
+          }}
         >
           {<Next />}
         </button>
       </div>
-    </div>
+    </Link>
   );
 }

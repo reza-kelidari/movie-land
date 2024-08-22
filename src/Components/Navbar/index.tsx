@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Styles from "./styles.module.scss";
 import GlobalStyles from "../../global.module.scss";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   interface NavbarStatus {
@@ -29,13 +30,15 @@ export default function Navbar() {
 
   return (
     <nav className={Styles.navBar}>
-      <div
+      <Link
+        to="/"
+        onClick={() => scrollTo({ behavior: "smooth", top: 0 })}
         className={[Styles.title, active.close ? GlobalStyles.hide : ""].join(
           " "
         )}
       >
         <span>مووی لند</span>
-      </div>
+      </Link>
       <input
         className={[Styles.searchBar, active.close ? "" : Styles.hide].join(
           " "
