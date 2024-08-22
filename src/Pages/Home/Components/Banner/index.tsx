@@ -12,7 +12,6 @@ interface Props {
 export default function Banner({ content }: Props) {
   const [page, setPage] = useState<number>(0);
   const [image, setImage] = useState<string>(Logo);
-  console.log(content[page]);
 
   useEffect(() => {
     const timeoutId = setTimeout(

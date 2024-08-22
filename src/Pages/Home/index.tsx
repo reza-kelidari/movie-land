@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Styles from "./styles.module.scss";
 import getContent, { Movie, Type } from "../../Utility/APIHandler";
 import Banner from "./Components/Banner";
+import Populars from "./Components/SideBar/Popular";
+import Genres from "./Components/SideBar/Genres";
 
 export default function Home() {
   const [content, setContent] = useState<Array<Movie>>([]);
@@ -17,11 +19,24 @@ export default function Home() {
 
   return (
     <>
-      <main className={Styles.main}>
-        <aside className={Styles.aside}>Side</aside>
+      <div className={Styles.top}>
+        <Banner content={content} />
+      </div>
+      <main className={Styles.content}>
+        <aside className={Styles.sideBar}>
+          <div className={Styles.popular}>
+            <Populars />
+          </div>
 
-        <section className={Styles.section}>
-          <Banner content={content} />
+          <div className={Styles.category}>
+            <Genres />
+          </div>
+        </aside>
+
+        <section className={Styles.topRated}>
+          <h1 className={Styles.title}>
+            برترین ها 👑 <span className={Styles.small}>در تلوزیون ها</span>
+          </h1>
         </section>
       </main>
     </>
