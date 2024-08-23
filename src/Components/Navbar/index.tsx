@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Styles from "./styles.module.scss";
 import GlobalStyles from "../../global.module.scss";
 import { Link } from "react-router-dom";
+import SearchContext from "../../Provider/SearchProvider";
 
 export default function Navbar() {
   interface NavbarStatus {
@@ -28,11 +29,16 @@ export default function Navbar() {
       close: !prevState.close,
     }));
 
+  const { search, setSearch } = useContext(SearchContext);
+
   return (
     <nav className={Styles.navBar}>
       <Link
         to="/"
-        onClick={() => scrollTo({ behavior: "smooth", top: 0 })}
+        onClick={() => {
+          scrollTo({ behavior: "smooth", top: 0 });
+          setSearch("");
+        }}
         className={[Styles.title, active.close ? GlobalStyles.hide : ""].join(
           " "
         )}
@@ -44,6 +50,9 @@ export default function Navbar() {
           " "
         )}
         placeholder="جستجو"
+        onChange={(event) => setSearch(event.target.value)}
+        value={search}
+        type="search"
       />
       <button
         className={[

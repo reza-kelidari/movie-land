@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import Styles from "./styles.module.scss";
-import getContent, { TVType, Type } from "../../../../Utility/APIHandler";
+import getContent, {
+  MovieType,
+  Type,
+} from "../../../../Utility/APIHandler";
 import Logo from "../../../../Assets/Logo.svg";
 import { Link } from "react-router-dom";
 
 export default function Popular() {
-  const [populars, setPopulars] = useState<Array<TVType>>([]);
+  const [upcoming, setUpcoming] = useState<Array<MovieType>>([]);
 
   useEffect(() => {
-    getContent(Type.TopRated).then((response) =>
-      setPopulars(response.results.slice(0, 7))
+    getContent(Type.Upcoming).then((response) =>
+      setUpcoming(response.results.slice(0, 7))
     );
   }, []);
 
@@ -17,7 +20,7 @@ export default function Popular() {
     <div className={Styles.populars}>
       <h3 className={Styles.title}>پرطرفدار 🔥</h3>
       <div className={Styles.list}>
-        {populars.map((item, index) => (
+        {upcoming.map((item, index) => (
           <Item movie={item} key={index} />
         ))}
       </div>
@@ -25,7 +28,7 @@ export default function Popular() {
   );
 }
 
-function Item({ movie }: { movie: TVType }) {
+function Item({ movie }: { movie: MovieType }) {
   const [image, setImage] = useState(Logo);
 
   useEffect(() => {
@@ -39,9 +42,9 @@ function Item({ movie }: { movie: TVType }) {
     <Link to={`/detail?type=tv&id=${movie.id}`} className={Styles.movie}>
       <img src={image} alt="Cover" className={Styles.cover} />
       <div className={Styles.details}>
-        <h3 className={Styles.title}>{movie.name}</h3>
+        <h3 className={Styles.title}>{movie.title}</h3>
         <span className={Styles.year}>
-          سال {movie.first_air_date.slice(0, 4)}
+          سال {movie.release_date.slice(0, 4)}
         </span>
         <span className={Styles.point}>{movie.vote_average.toFixed(1)} ⭐</span>
       </div>

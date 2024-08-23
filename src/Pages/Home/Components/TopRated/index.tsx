@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Styles from "./styles.module.scss";
 import getContent, { MovieType, Type } from "../../../../Utility/APIHandler";
-import Movie from "../../../../Components/Movie";
+import MovieItem from "../../../../Components/MovieItem";
 
 export default function TopRated() {
   const [movies, setMovies] = useState<Array<MovieType>>([]);
@@ -20,7 +20,7 @@ export default function TopRated() {
 
       <div className={Styles.list}>
         {movies.map((item) => (
-          <Movie info={item} />
+          <MovieItem movie={item} key={item.id} tv={null} search={null} />
         ))}
       </div>
     </section>

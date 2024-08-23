@@ -70,11 +70,7 @@ export interface GenreType {
 
 export default async function getContent<T extends Type>(
   content: T
-): Promise<
-  T extends Type.Genre
-    ? GenreType
-    : Response<T extends Type.TopRated ? TVType : MovieType>
-> {
+): Promise<T extends Type.Genre ? GenreType : Response<MovieType>> {
   return await fetch(
     url + content + (content !== Type.Genre ? query : ""),
     options
@@ -288,4 +284,40 @@ export async function getCredits<T extends DetailType>(
   return await fetch(url + type + id + "/credits" + query, options).then(
     (response) => response.json()
   );
+}
+
+export interface SearchResponseType {
+  backdrop_path?: string;
+  id?: number;
+  title?: string;
+  original_title?: string;
+  name?: string;
+  original_name?: string;
+  overview?: string;
+  poster_path?: string;
+  media_type?: string;
+  adult?: false;
+  original_language?: string;
+  genre_ids?: Array<number>;
+  popularity?: number;
+  first_air_date?: string;
+  release_date?: string;
+  vote_average?: number;
+  vote_count?: number;
+  video?: boolean;
+  origin_country?: Array<String>;
+}
+
+export async function searchMedia(
+  q: string
+): Promise<Response<SearchResponseType>> {
+  return fetch(
+    url +
+      "search/multi" +
+      query +
+      "&query=" +
+      q +
+      "&include_adult=true&page=1&",
+    options
+  ).then((response) => response.json());
 }

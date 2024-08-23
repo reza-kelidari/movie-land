@@ -13,9 +13,9 @@ export default function Next({ fill = "#fff" }) {
         transform="translate(-135.742 -1242.443)"
         fill="none"
         stroke={fill}
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="3"
       />
     </svg>
   );
