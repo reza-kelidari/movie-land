@@ -12,7 +12,7 @@
   align-items: center;
   flex-direction: column;
   gap: 2rem;
-  padding: 8rem 2rem 0 2rem;
+  padding: 8rem 2rem 2rem;
 
   .topBar {
     position: relative;
@@ -24,7 +24,6 @@
     display: flex;
     align-items: center;
     gap: 3rem;
-    min-height: 50rem;
 
     .background {
       position: absolute;
@@ -93,10 +92,21 @@
         width: 100%;
       }
 
-      .yearAndVote {
+      .smallDetails {
         display: flex;
         align-items: center;
         gap: 1rem;
+        overflow-x: scroll;
+        scrollbar-width: none;
+        width: 100%;
+        white-space: nowrap;
+
+        .line {
+          height: 100%;
+          width: 2px;
+          border-radius: 2px;
+          background: #ffffff22;
+        }
 
         .year {
           font-size: 1rem;
@@ -111,7 +121,56 @@
           background: #ffffff22;
           border-radius: 1rem;
         }
+
+        .directors {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          font-size: 1rem;
+          
+          .title {
+            opacity: 0.5;
+            font-size: 1rem;
+          }
+
+          .director {
+            padding: 0.25rem 0.5rem;
+            background: #ffffff22;
+            border-radius: 1rem;
+          }
+        }
       }
+    }
+  }
+
+  .cast {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    width: 90%;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+      height: 8px;
+      background-color: #f5f5f522;
+      border-radius: 1rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 10px;
+    }
+
+    .titleBar {
+      .title {
+        font-size: 2rem;
+      }
+    }
+
+    .list {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
   }
 }
@@ -119,7 +178,7 @@
 @media only screen and (max-width: 1024px) {
   .detail {
     gap: 1rem;
-    padding: 7rem 1rem 0 1rem;
+    padding: 7rem 1rem 1rem;
 
     .topBar {
       flex-direction: column;
@@ -138,6 +197,10 @@
         padding: 2rem;
         border-radius: 2rem;
 
+        .genres {
+          justify-content: center;
+        }
+
         .title {
           font-size: 2rem;
         }
@@ -147,16 +210,20 @@
         }
       }
     }
+
+    .cast {
+      scrollbar-width: none;
+      gap: 1rem;
+    }
   }
 }
 
 @media only screen and (max-width: 768px) {
   .detail {
-    padding: 6rem 1rem 0 1rem;
+    padding: 6rem 1rem 1rem;
 
     .topBar {
       border-radius: 3rem;
-
       padding: 1.5rem;
 
       .cover {
@@ -183,6 +250,12 @@
         .subTitle {
           font-size: 1.25rem;
           text-align: center;
+        }
+
+        .smallDetails {
+          .directors {
+            gap: 0.5rem;
+          }
         }
       }
     }

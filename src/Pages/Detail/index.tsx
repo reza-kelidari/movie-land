@@ -2,13 +2,17 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Styles from "./styles.module.scss";
 import { useEffect, useState } from "react";
 import {
+  Credit,
+  CrewJob,
   DetailType,
+  getCredits,
   getMovie,
   MovieDetail,
   TVDetail,
 } from "../../Utility/APIHandler";
 import Logo from "../../assets/Banner_Loading.svg";
 import Company from "./Components/Company";
+import Cast from "./Components/Cast";
 
 export default function Detail() {
   const params = useLocation();
@@ -18,16 +22,22 @@ export default function Detail() {
     navigate("/");
   }
 
+  const contentID = paramsHandler.get("id") as any as number;
+  const contentType =
+    paramsHandler.get("type") === "movie" ? DetailType.Movie : DetailType.TV;
+
   const [movie, setMovie] = useState<MovieDetail & TVDetail>();
+  const [credit, setCredit] = useState<Credit>();
 
   const [background, setBackground] = useState<string>();
   const [cover, setCover] = useState<string>();
 
   useEffect(() => {
-    getMovie(
-      parseInt(paramsHandler.get("id") as string),
-      paramsHandler.get("type") === "movie" ? DetailType.Movie : DetailType.TV
-    ).then((response) => setMovie(response as any));
+    getMovie(contentID, contentType).then((response) =>
+      setMovie(response as any)
+    );
+
+    getCredits(contentID, contentType).then((response) => setCredit(response));
   }, []);
 
   useEffect(() => {
@@ -73,7 +83,7 @@ export default function Detail() {
               ))}
             </div>
 
-            <div className={Styles.yearAndVote}>
+            <div className={Styles.smallDetails}>
               <span className={Styles.vote}>
                 {movie.vote_average.toFixed(1)} ⭐
               </span>
@@ -82,7 +92,30 @@ export default function Detail() {
                 محصول سال{" "}
                 {(movie.first_air_date || movie.release_date).slice(0, 4)}
               </span>
+
+              <span className={Styles.directors}>
+                <span className={Styles.title}>کارگردان (ها):</span>
+                {credit?.crew
+                  .filter(
+                    (item) => item.known_for_department === CrewJob.Directing
+                  )
+                  .map((item) => (
+                    <span className={Styles.director}>{item.name}</span>
+                  ))}
+              </span>
             </div>
+          </div>
+        </div>
+
+        <div className={Styles.cast}>
+          <div className={Styles.titleBar}>
+            <h3 className={Styles.title}>بازیگران</h3>
+          </div>
+
+          <div className={Styles.list}>
+            {credit?.cast.slice(0, 7).map((item) => (
+              <Cast key={item.id} cast={item} />
+            ))}
           </div>
         </div>
       </div>

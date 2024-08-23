@@ -1,0 +1,38 @@
+.cast {
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  overflow: hidden;
+  width: 10rem;
+  height: 20rem;
+  position: relative;
+
+  .detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+    background: #ffffff22;
+    backdrop-filter: blur(1rem) brightness(50%);
+    padding: 1rem 0.5rem;
+
+    .name {
+      font-size: 1rem;
+      font-weight: 500;
+      white-space: nowrap;
+      width: 100%;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .job,
+    .character {
+      font-size: 0.75rem;
+      font-weight: 300;
+      opacity: 0.5;
+      text-align: center;
+    }
+  }
+}

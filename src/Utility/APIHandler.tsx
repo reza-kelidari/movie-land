@@ -113,22 +113,18 @@ export interface MovieDetail {
   popularity: number;
   poster_path: string;
   production_companies: Array<Company>;
-  production_countries: [
-    {
-      iso_3166_1: string;
-      name: string;
-    }
-  ];
+  production_countries: Array<{
+    iso_3166_1: string;
+    name: string;
+  }>;
   release_date: string;
   revenue: number;
   runtime: number;
-  spoken_languages: [
-    {
-      english_name: string;
-      iso_639_1: string;
-      name: string;
-    }
-  ];
+  spoken_languages: Array<{
+    english_name: string;
+    iso_639_1: string;
+    name: string;
+  }>;
   status: string;
   tagline: string;
   title: string;
@@ -140,16 +136,14 @@ export interface MovieDetail {
 export interface TVDetail {
   adult: boolean;
   backdrop_path: string;
-  created_by: [
-    {
-      id: number;
-      credit_id: string;
-      name: string;
-      original_name: string;
-      gender: number;
-      profile_path: string;
-    }
-  ];
+  created_by: Array<{
+    id: number;
+    credit_id: string;
+    name: string;
+    original_name: string;
+    gender: number;
+    profile_path: string;
+  }>;
   episode_run_time: Array<any>;
   first_air_date: string;
   genres: Array<Genre>;
@@ -175,14 +169,12 @@ export interface TVDetail {
   };
   name: string;
   next_episode_to_air: null;
-  networks: [
-    {
-      id: number;
-      logo_path: string;
-      name: string;
-      origin_country: string;
-    }
-  ];
+  networks: Array<{
+    id: number;
+    logo_path: string;
+    name: string;
+    origin_country: string;
+  }>;
   number_of_episodes: number;
   number_of_seasons: number;
   origin_country: Array<string>;
@@ -192,20 +184,16 @@ export interface TVDetail {
   popularity: number;
   poster_path: string;
   production_companies: Array<Company>;
-  production_countries: [
-    {
-      iso_3166_1: string;
-      name: string;
-    }
-  ];
+  production_countries: Array<{
+    iso_3166_1: string;
+    name: string;
+  }>;
   seasons: Array<Season>;
-  spoken_languages: [
-    {
-      english_name: string;
-      iso_639_1: string;
-      name: string;
-    }
-  ];
+  spoken_languages: Array<{
+    english_name: string;
+    iso_639_1: string;
+    name: string;
+  }>;
   status: string;
   tagline: string;
   type: string;
@@ -242,5 +230,62 @@ export async function getMovie<T extends DetailType>(
 ): Promise<T extends DetailType.Movie ? MovieDetail : MovieDetail> {
   return await fetch(url + type + id + query, options).then((response) =>
     response.json()
+  );
+}
+
+export interface CastType {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: "Acting";
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string;
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  order: number;
+}
+
+export enum CrewJob {
+  VisualEffects = "Visual Effects",
+  Writing = "Writing",
+  Production = "Production",
+  Art = "Art",
+  Acting = "Acting",
+  Directing = "Directing",
+  Sound = "Sound",
+  Editing = "Editing",
+  Crew = "Crew",
+  Camera = "Camera",
+}
+
+export interface CrewType {
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: CrewJob;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string;
+  credit_id: string;
+  department: string;
+  job: string;
+}
+
+export interface Credit {
+  id: number;
+  cast: Array<CastType>;
+  crew: Array<CrewType>;
+}
+
+export async function getCredits<T extends DetailType>(
+  id: number,
+  type: T
+): Promise<Credit> {
+  return await fetch(url + type + id + "/credits" + query, options).then(
+    (response) => response.json()
   );
 }

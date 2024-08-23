@@ -29,3 +29,11 @@
     justify-content: space-around;
   }
 }
+
+@media only screen and (max-width: 1024px) {
+  .topRated {
+    .title {
+      gap: 1rem;
+    }
+  }
+}

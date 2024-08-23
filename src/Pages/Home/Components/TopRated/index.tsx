@@ -15,7 +15,7 @@ export default function TopRated() {
   return (
     <section className={Styles.topRated}>
       <h1 className={Styles.title}>
-        برترین ها 👑 <span className={Styles.small}>در تلوزیون ها</span>
+        برترین ها 👑 <span className={Styles.small}>در سینما ها</span>
       </h1>
 
       <div className={Styles.list}>
