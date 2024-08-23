@@ -6,7 +6,7 @@ import SearchProvider from "./Provider/SearchProvider";
 import { useState } from "react";
 
 export default function App() {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState<string>("");
   return (
     <>
       <SearchProvider.Provider value={{ search, setSearch }}>

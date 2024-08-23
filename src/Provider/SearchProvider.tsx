@@ -1,12 +1,12 @@
-import { createContext } from "react";
+import { Context, createContext } from "react";
+import { SearchContextContent } from "./types";
 
-export interface SearchContextType {
-  search: string;
-  setSearch: (value: string) => void;
-}
-
-const SearchContext = createContext<SearchContextType>({
-  search: "",
-  setSearch: () => {},
-});
+/**
+ * Context that maintains Search query
+ */
+const SearchContext: Context<SearchContextContent> =
+  createContext<SearchContextContent>({
+    search: "",
+    setSearch: () => {},
+  });
 export default SearchContext;

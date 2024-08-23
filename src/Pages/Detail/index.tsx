@@ -1,37 +1,66 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Styles from "./styles.module.scss";
 import { useEffect, useState } from "react";
-import {
-  Credit,
-  CrewJob,
-  DetailType,
-  getCredits,
-  getMovie,
-  MovieDetail,
-  TVDetail,
-} from "../../Utility/APIHandler";
-import Logo from "../../assets/Banner_Loading.svg";
+import { CreditResponse, CrewJob, DetailType } from "../../API/Credits/types";
+import { getCredits } from "../../API/Credits";
+import { getMovie } from "../../API/Movie";
+import LoadingBanner from "../../assets/LoadingBanner.svg";
 import Company from "./Components/Company";
 import Cast from "./Components/Cast";
+import { MovieDetailType } from "./types";
+import { imageURL } from "../../Utility/Statics";
 
-export default function Detail() {
+/**
+ * Detail page
+ *
+ * This component will render the home page, that contains Media details
+ * and Actors ist
+ *
+ * @returns {JSX.Element}
+ */
+export default function Detail(): JSX.Element {
+  /**
+   * Get the current URL parameters
+   */
   const params = useLocation();
+
   const navigate = useNavigate();
   const paramsHandler = new URLSearchParams(params.search);
-  if (!paramsHandler.has("type") || !paramsHandler.has("id")) {
+
+  /**
+   * Check if the required parameters are present in the URL
+   * If not, redirect to the home page
+   */
+  if (!paramsHandler.get("type") || !paramsHandler.get("id")) {
     navigate("/");
   }
 
-  const contentID = paramsHandler.get("id") as any as number;
-  const contentType =
+  /**
+   * Extract the content ID and type from the URL parameters
+   */
+  const contentID: number = parseInt(paramsHandler.get("id") ?? "0");
+  const contentType: DetailType =
     paramsHandler.get("type") === "movie" ? DetailType.Movie : DetailType.TV;
 
-  const [movie, setMovie] = useState<MovieDetail & TVDetail>();
-  const [credit, setCredit] = useState<Credit>();
+  /**
+   * Defining movie details and credit list
+   */
+  const [movie, setMovie] = useState<MovieDetailType>();
+  const [credit, setCredit] = useState<CreditResponse>();
 
-  const [background, setBackground] = useState<string>();
-  const [cover, setCover] = useState<string>();
+  /**
+   * Defining image state, by now just a placeholder
+   */
+  const [background, setBackground] = useState<string>(LoadingBanner);
+  const [cover, setCover] = useState<string>(LoadingBanner);
 
+  /**
+   * @effect that receives Media data from APIHandler's getMovie method,
+   * and inserts it in movie state using setMovie method
+   *
+   * It's also receives Credits data from APIHandler's getCredits method,
+   * and inserts it in credit state using setCredit method
+   */
   useEffect(() => {
     getMovie(contentID, contentType).then((response) =>
       setMovie(response as any)
@@ -40,19 +69,27 @@ export default function Detail() {
     getCredits(contentID, contentType).then((response) => setCredit(response));
   }, []);
 
+  /**
+   * @effect that sets Media poster after 5ms
+   *
+   * This @effect runs after movie state sets
+   */
   useEffect(() => {
-    setBackground(Logo);
-    setCover(Logo);
-
     setTimeout(() => {
-      setBackground("https://image.tmdb.org/t/p/w1280" + movie?.backdrop_path);
-      setCover("https://image.tmdb.org/t/p/w342" + movie?.poster_path);
-    }, 10);
+      setBackground(imageURL + "w1280" + movie?.backdrop_path);
+      setCover(imageURL + "w342" + movie?.poster_path);
+    }, 5);
   }, [movie]);
 
+  /**
+   * Render the loading message if the movie data is not available
+   */
   if (!movie) {
     return <div className={Styles.loading}>لطفا صبر کنید</div>;
   } else {
+    /**
+     * Else, render the detail page
+     */
     return (
       <div className={Styles.detail}>
         <div className={Styles.topBar}>

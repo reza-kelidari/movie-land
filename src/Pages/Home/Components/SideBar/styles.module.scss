@@ -1,5 +1,5 @@
 .genres,
-.populars {
+.upcoming {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -75,7 +75,7 @@
 
 @media only screen and (max-width: 1024px) {
   .genres,
-  .populars {
+  .upcoming {
     .list {
       flex-direction: row;
       flex-wrap: wrap;
@@ -93,7 +93,7 @@
 
 @media only screen and (max-width: 640px) {
   .genres,
-  .populars {
+  .upcoming {
     .list {
       flex-direction: column;
       flex-wrap: unset;

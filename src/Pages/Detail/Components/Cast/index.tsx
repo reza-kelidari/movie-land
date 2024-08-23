@@ -1,11 +1,21 @@
-import { CastType } from "../../../../Utility/APIHandler";
+import { imageURL } from "../../../../Utility/Statics";
 import Styles from "./styles.module.scss";
+import { CastProps } from "./type";
 
-export default function Cast({ cast }: { cast: CastType }) {
+/**
+ * Cast component for Detail page
+ *
+ * This component renders an element contains actor photo, name, and
+ * the job and character he played in that media
+ *
+ * @param cast - Detail of Actor
+ * @returns {JSX.Element}
+ */
+export default function Cast({ cast }: CastProps): JSX.Element {
   return (
     <div className={Styles.cast}>
       <img
-        src={"https://image.tmdb.org/t/p/w185" + cast.profile_path}
+        src={imageURL + "w185" + cast.profile_path}
         alt="Propfile"
         className={Styles.profile}
       />
