@@ -32,6 +32,31 @@
       width: 100%;
       padding: 1rem;
     }
+
+    .copyright {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+
+      .link {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 1rem;
+        background: #ffffff22;
+
+        .title {
+          font-size: 1rem;
+          white-space: nowrap;
+        }
+
+        .logo {
+          height: 2rem;
+        }
+      }
+    }
   }
 }
 

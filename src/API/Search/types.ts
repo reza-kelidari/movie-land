@@ -96,5 +96,5 @@ export interface SearchResponseType {
   /**
    * Original country of the media
    */
-  origin_country?: Array<String>;
+  origin_country?: Array<string>;
 }

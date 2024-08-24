@@ -10,6 +10,8 @@ import Popular from "./Components/Popular";
 import SearchContext from "../../Provider/SearchProvider";
 import MovieItem from "../../Components/MovieItem";
 import { ContentType, SearchResultType } from "./types";
+import Github from "../../Assets/GitHub.svg";
+import TMDB from "../../Assets/TMDB.svg";
 
 /**
  * Home Page
@@ -90,6 +92,20 @@ export default function Home(): JSX.Element {
 
             <div className={Styles.category}>
               <Genres />
+            </div>
+
+            <div className={Styles.copyright}>
+              <a
+                className={Styles.link}
+                href="https://github.com/reza-kelidari/movie-land"
+              >
+                <img className={Styles.logo} src={Github} alt="Github" />
+                <span className={Styles.title}>مشاهده در گیتهاب</span>
+              </a>
+
+              <a className={Styles.link} href="https://themoviedb.org/">
+                <img className={Styles.logo} src={TMDB} alt="TheMovieDB" />
+              </a>
             </div>
           </aside>
 
