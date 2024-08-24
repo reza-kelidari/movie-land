@@ -44,7 +44,7 @@ export interface CastType {
   /**
    * The department the cast member is known for
    */
-  known_for_department: CrewJob;
+  known_for_department: string;
 
   /**
    * The cast member's name
@@ -88,24 +88,6 @@ export interface CastType {
 }
 
 /**
- * CrewJob Enum
- *
- * Represent what can a crew member do
- */
-export enum CrewJob {
-  VisualEffects = "Visual Effects",
-  Writing = "Writing",
-  Production = "Production",
-  Art = "Art",
-  Acting = "Acting",
-  Directing = "Directing",
-  Sound = "Sound",
-  Editing = "Editing",
-  Crew = "Crew",
-  Camera = "Camera",
-}
-
-/**
  * CrewType Interface
  *
  * Represent a single Crew member
@@ -129,7 +111,7 @@ export interface CrewType {
   /**
    * The department the crew member is known for
    */
-  known_for_department: CrewJob;
+  known_for_department: string;
 
   /**
    * The crew member's name

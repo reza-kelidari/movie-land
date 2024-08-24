@@ -6,18 +6,24 @@ export const apiKey: string =
 
 /**
  * Default url for fetching data from server
+ *
+ * `https://api.themoviedb.org/3/`
  */
 export const dataURL: string = "https://api.themoviedb.org/3/";
 
 /**
  * Default url for images
+ *
+ * `https://image.tmdb.org/t/p/
  */
 export const imageURL: string = "https://image.tmdb.org/t/p/";
 
 /**
- * Custom queries
+ * Default query
+ *
+ * `?language=fa-IR`
  */
-export const query: string = "?language=fa-IR";
+export const defaultQuery: string = "?language=fa-IR";
 
 /**
  * Options for fetching data from server

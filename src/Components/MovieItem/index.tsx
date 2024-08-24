@@ -20,9 +20,10 @@ export default function MovieItem({
   movie,
   tv,
   search,
+  filter,
 }: MovieItemProps): JSX.Element {
   /**
-   * Defining Image, by now just a placeholder
+   * Declaring Image, by now just a placeholder
    */
   const [image, setImage] = useState(LoadingBanner);
 
@@ -35,12 +36,18 @@ export default function MovieItem({
     /**
      * The media unique identifier
      */
-    id: movie?.id ?? tv?.id ?? search?.id ?? 0,
+    id: (movie ?? tv ?? search ?? filter)?.id ?? 0,
 
     /**
      * The media title
      */
-    title: movie?.title ?? tv?.name ?? search?.name ?? search?.title ?? "",
+    title:
+      movie?.title ??
+      (tv ?? search)?.name ??
+      search?.title ??
+      search?.name ??
+      filter?.title ??
+      "",
 
     /**
      * Year when the media released
@@ -50,23 +57,25 @@ export default function MovieItem({
         movie?.release_date ??
         tv?.first_air_date ??
         search?.release_date ??
-        search?.first_air_date
+        search?.first_air_date ??
+        filter?.release_date
       )?.slice(0, 4) ?? "",
 
     /**
      * Average vote of the media
      */
-    vote: (movie ?? tv ?? search)?.vote_average?.toFixed(1) ?? "",
+    vote: (movie ?? tv ?? search ?? filter)?.vote_average?.toFixed(1) ?? "",
 
     /**
      * Type of the media
      */
-    type: search?.media_type ?? movie ? "movie" : "tv",
+    type:
+      movie || filter ? "movie" : search?.media_type ? search.media_type : "tv",
 
     /**
      * Poster path of the media
      */
-    poster: (movie ?? tv ?? search)?.poster_path ?? "",
+    poster: (movie ?? tv ?? search ?? filter)?.poster_path ?? "",
   };
 
   /**

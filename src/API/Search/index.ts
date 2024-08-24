@@ -5,7 +5,7 @@
  * medias from server by a specific provided query
  */
 
-import { dataURL, query, options } from "../../Utility/Statics";
+import { dataURL, defaultQuery, options } from "../../Utility/Statics";
 import { Response } from "../types";
 import { SearchResponseType } from "./types";
 
@@ -24,7 +24,7 @@ export async function searchMedia(
   const url =
     dataURL +
     "search/multi" +
-    query +
+    defaultQuery +
     "&query=" +
     q +
     "&include_adult=true&page=1&";

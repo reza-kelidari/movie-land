@@ -1,6 +1,7 @@
 import { TVType } from "../../API/TV/types";
 import { SearchResponseType } from "../../API/Search/types";
 import { MovieType } from "../../API/Movie/types";
+import { GenresResponse } from "../../API/Genre/types";
 
 /**
  * Interface for MovieItem component props
@@ -12,19 +13,24 @@ import { MovieType } from "../../API/Movie/types";
  */
 export interface MovieItemProps {
   /**
-   * The movie details, should be like MovieType
+   * The movie item details
    */
   movie?: MovieType;
 
   /**
-   * The tv serie details, should be like TVType
+   * The tv serie item details
    */
   tv?: TVType;
 
   /**
-   * The search result details, should be like SearchResponseType
+   * The search result item details
    */
   search?: SearchResponseType;
+
+  /**
+   * The filter result item details
+   */
+  filter?: GenresResponse;
 }
 
 /**
@@ -38,21 +44,39 @@ export interface MovieItemProps {
  * @property {poster} string - Media poster
  */
 export interface MediaData {
-  /** The movie identifier, or tv serie identifier, or search result identifier */
+  /** The movie, or tv serie, or search result,or filter result
+   * identifier */
   id: number;
 
-  /** The movie title, or tv serie name, or search result name or title */
+  /** The movie title
+   *
+   * Or tv serie name
+   *
+   * Or search result name or title
+   *
+   * Or filter result name */
   title: string;
 
-  /** The movie Release date, or tv first air date, or search result release date or first air date */
+  /** The movie Release date
+   *
+   * Or tv first air date
+   *
+   * Or search result release date or first air date
+   *
+   * Or filter result release date */
   year: string;
 
-  /** The movie or tv serie or search result average vote */
+  /** The movie or tv serie or search result or filter result average vote */
   vote: string;
 
-  /** It's should defined by search result media type, or a movie or a tv */
+  /** It's should Declared by search result media type,
+   *
+   * Or a movie or a tv
+   *
+   * Or if it's a filter result, it's a movie
+   */
   type: string;
 
-  /** The movie or tv serie or search result vote */
+  /** The movie or tv serie or search result or filter result vote */
   poster: string;
 }

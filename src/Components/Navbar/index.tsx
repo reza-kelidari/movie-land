@@ -104,9 +104,12 @@ export default function Navbar(): JSX.Element {
       <button
         className={[
           Styles.closeSearch,
-          active.close ? "" : GlobalStyles.hide,
+          active.close ? "" : search.length === 0 ? GlobalStyles.hide : "",
         ].join(" ")}
-        onClick={changeActive}
+        onClick={() => {
+          changeActive();
+          setSearch("");
+        }}
       >
         X
       </button>

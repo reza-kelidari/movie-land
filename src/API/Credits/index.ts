@@ -5,7 +5,7 @@
  * data from server based on given Media ID and Type
  */
 
-import { dataURL, query, options } from "../../Utility/Statics";
+import { dataURL, defaultQuery, options } from "../../Utility/Statics";
 import { DetailType, CreditResponse } from "./types";
 
 /**
@@ -26,7 +26,7 @@ export async function getCredits<T extends DetailType>(
   /**
    * Construct the API URL for fetching credits data.
    */
-  const url = dataURL + type + id + "/credits" + query;
+  const url = dataURL + type + id + "/credits" + defaultQuery;
 
   /**
    * Fetch the credits data from the API.

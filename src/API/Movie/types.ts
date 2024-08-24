@@ -6,7 +6,7 @@
 import { CompanyType } from "../types";
 
 /**
- * Movie Type - For lists in Home page
+ * Movie Type - For lists
  *
  * Represents shape of a Movie in movies list
  */

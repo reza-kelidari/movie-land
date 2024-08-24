@@ -6,7 +6,7 @@
  */
 
 import { DetailType } from "../Credits/types";
-import { dataURL, query, options } from "../../Utility/Statics";
+import { dataURL, defaultQuery, options } from "../../Utility/Statics";
 import { MovieDetail } from "./types";
 
 /**
@@ -27,7 +27,7 @@ export async function getMovie<T extends DetailType>(
   /**
    * Construct the API URL for fetching credits data.
    */
-  const url = dataURL + type + id + query;
+  const url = dataURL + type + id + defaultQuery;
 
   /**
    * Fetch the movie data from the API.

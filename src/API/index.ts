@@ -5,7 +5,7 @@
  * from the API based on the provided content type.
  */
 
-import { options, query, dataURL } from "../Utility/Statics";
+import { options, defaultQuery, dataURL } from "../Utility/Statics";
 import { MovieType } from "./Movie/types";
 import { Response, Type } from "./types";
 import { GenresType } from "./Genre/types";
@@ -27,7 +27,7 @@ export default async function getContent<T extends Type>(
   /**
    * Construct the API URL based on the content type.
    */
-  const url = dataURL + content + (content !== Type.Genre ? query : "");
+  const url = dataURL + content + (content !== Type.Genre ? defaultQuery : "");
 
   /**
    * Fetch the data from the API.

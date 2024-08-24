@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import Styles from "../styles.module.scss";
 import getContent from "../../../../../API";
 import { Type } from "../../../../../API/types";
-import { GenresListType } from "./types";
+import { GenreInteType, GenresListType } from "./types";
+import { Link } from "react-router-dom";
 
 /**
  * Genres Component for Home page side bar
@@ -32,7 +33,7 @@ export default function Genres(): JSX.Element {
 
       <div className={Styles.list}>
         {genres.map((genre) => (
-          <GenreItem name={genre.name} key={genre.id} />
+          <GenreItem id={genre.id} name={genre.name} key={genre.id} />
         ))}
       </div>
     </div>
@@ -44,6 +45,10 @@ export default function Genres(): JSX.Element {
  * @param name - Genre name
  * @returns {JSX.Element}
  */
-function GenreItem({ /*id,*/ name }: { name: string }): JSX.Element {
-  return <div className={Styles.genre}>{name}</div>;
+function GenreItem({ id, name }: GenreInteType): JSX.Element {
+  return (
+    <Link to={`/genre?id=${id}`} className={Styles.genre}>
+      {name}
+    </Link>
+  );
 }

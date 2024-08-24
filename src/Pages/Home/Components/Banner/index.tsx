@@ -16,12 +16,12 @@ import { BannerProps } from "./types.ts";
  */
 export default function Banner({ content }: BannerProps): JSX.Element {
   /**
-   * Defining Page number state
+   * Declaring Page number state
    */
   const [page, setPage] = useState<number>(0);
 
   /**
-   * Defining Banner image, by now just a placeholder
+   * Declaring Banner image, by now just a placeholder
    */
   const [image, setImage] = useState<string>(LodingBanner);
 

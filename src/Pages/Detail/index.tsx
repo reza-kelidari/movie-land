@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Styles from "./styles.module.scss";
 import { useEffect, useState } from "react";
-import { CreditResponse, CrewJob, DetailType } from "../../API/Credits/types";
+import { CreditResponse, CrewType, DetailType } from "../../API/Credits/types";
 import { getCredits } from "../../API/Credits";
 import { getMovie } from "../../API/Movie";
 import LoadingBanner from "../../assets/LoadingBanner.svg";
@@ -43,30 +43,62 @@ export default function Detail(): JSX.Element {
     paramsHandler.get("type") === "movie" ? DetailType.Movie : DetailType.TV;
 
   /**
-   * Defining movie details and credit list
+   * Declaring movie details and credit list
    */
   const [movie, setMovie] = useState<MovieDetailType>();
   const [credit, setCredit] = useState<CreditResponse>();
+  const [directors, setDirectors] = useState<Array<CrewType>>([]);
 
   /**
-   * Defining image state, by now just a placeholder
+   * Declaring image state, by now just a placeholder
    */
   const [background, setBackground] = useState<string>(LoadingBanner);
   const [cover, setCover] = useState<string>(LoadingBanner);
 
   /**
-   * @effect that receives Media data from APIHandler's getMovie method,
-   * and inserts it in movie state using setMovie method
-   *
-   * It's also receives Credits data from APIHandler's getCredits method,
-   * and inserts it in credit state using setCredit method
+   * @effect that maintains media's details
    */
   useEffect(() => {
+    /**
+     * This method receives Media data from APIHandler's getMovie method,
+     * and inserts it in movie state using setMovie method
+     */
     getMovie(contentID, contentType).then((response) =>
       setMovie(response as any)
     );
 
-    getCredits(contentID, contentType).then((response) => setCredit(response));
+    /**
+     * This receives Credits data from APIHandler's getCredits method,
+     * and inserts it in credit state using setCredit method
+     *
+     * Also finds the director inside crew members
+     */
+    getCredits(contentID, contentType).then((response) => {
+      /**
+       * Set credit state first
+       */
+      setCredit(response);
+
+      /**
+       * Finding Directing department members
+       */
+      const directing = response.crew.filter(
+        (item) =>
+          item.known_for_department === "Directing" ||
+          item.department == "Directing"
+      );
+
+      /**
+       * Finding the directors inside Directing department members
+       */
+      const directors = directing.filter((item) => item.job === "Director");
+
+      /**
+       * If there is a specific director, insert that to directors list
+       * state, or if not insert all members of Directing department
+       */
+      setDirectors(directors || directing);
+    });
   }, []);
 
   /**
@@ -132,13 +164,9 @@ export default function Detail(): JSX.Element {
 
               <span className={Styles.directors}>
                 <span className={Styles.title}>کارگردان (ها):</span>
-                {credit?.crew
-                  .filter(
-                    (item) => item.known_for_department === CrewJob.Directing
-                  )
-                  .map((item) => (
-                    <span className={Styles.director}>{item.name}</span>
-                  ))}
+                {directors.map((item) => (
+                  <span className={Styles.director}>{item.name}</span>
+                ))}
               </span>
             </div>
           </div>

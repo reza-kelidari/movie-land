@@ -57,7 +57,7 @@ export default function Upcoming(): JSX.Element {
  */
 function Item({ movie }: { movie: MovieType }): JSX.Element {
   /**
-   * Defining item image, by now just a placeholder
+   * Declaring item image, by now just a placeholder
    */
   const [image, setImage] = useState(LoadingBanner);
 
@@ -69,7 +69,7 @@ function Item({ movie }: { movie: MovieType }): JSX.Element {
   }, []);
 
   return (
-    <Link to={`/detail?type=tv&id=${movie.id}`} className={Styles.movie}>
+    <Link to={`/detail?type=movie&id=${movie.id}`} className={Styles.movie}>
       <img src={image} alt="Cover" className={Styles.cover} />
       <div className={Styles.details}>
         <h3 className={Styles.title}>{movie.title}</h3>
