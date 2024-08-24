@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Styles from "./styles.module.scss";
-import LoadingBanner from "../../assets/LoadingBanner.svg";
+import LoadingBanner from "../../Assets/LoadingBanner.svg";
 import { Link } from "react-router-dom";
 import { MediaData, MovieItemProps } from "./types";
 import { imageURL } from "../../Utility/Statics";

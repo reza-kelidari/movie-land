@@ -43,6 +43,8 @@
       .cover {
         border-radius: 1rem;
         height: 7rem;
+        max-width: 5rem;
+        object-fit: cover;
       }
 
       .details {

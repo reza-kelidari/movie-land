@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { CreditResponse, CrewType, DetailType } from "../../API/Credits/types";
 import { getCredits } from "../../API/Credits";
 import { getMovie } from "../../API/Movie";
-import LoadingBanner from "../../assets/LoadingBanner.svg";
+import LoadingBanner from "../../Assets/LoadingBanner.svg";
 import Company from "./Components/Company";
 import Cast from "./Components/Cast";
 import { MovieDetailType } from "./types";

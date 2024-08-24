@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Styles from "./styles.module.scss";
-import LodingBanner from "../../../../assets/LoadingBanner.svg";
+import LoadingBanner from "../../../../Assets/LoadingBanner.svg";
 import Next from "../../../../Assets/Next.tsx";
 import Previus from "../../../../Assets/Previous.tsx";
 import { Link } from "react-router-dom";
@@ -23,7 +23,7 @@ export default function Banner({ content }: BannerProps): JSX.Element {
   /**
    * Declaring Banner image, by now just a placeholder
    */
-  const [image, setImage] = useState<string>(LodingBanner);
+  const [image, setImage] = useState<string>(LoadingBanner);
 
   /**
    * @effect that adds a timeount for changing Banner image automatically
@@ -53,7 +53,7 @@ export default function Banner({ content }: BannerProps): JSX.Element {
    * This @effect runs everytime page number changes
    */
   useEffect(() => {
-    setImage(LodingBanner);
+    setImage(LoadingBanner);
     const timeoutId = setTimeout(
       () =>
         setImage(
